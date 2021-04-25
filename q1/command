@@ -1,0 +1,33 @@
+#!/usr/bin/php
+<?php
+
+// Get input file contents from the command argument
+$input = file_get_contents('./' . $argv[1]);
+// Explode the input string into individual lines
+$lines = explode(PHP_EOL, $input);
+
+// Loop through each line
+foreach ($lines as $line) {
+  // Explode the line into individual words
+  $words = explode(' ', $line);
+  // Assume the first word is the shortest
+  $shortest_length = strlen($words[0]);
+  // Current index key of the shortest word
+  $shortest_key = 0;
+
+  // Loop through each word
+  foreach ($words as $key => $word) {
+    // Word length
+    $lenght = strlen($word);
+
+    // If the word is shorter than the previous words
+    if ($lenght < $shortest_length) {
+      // Mark as the shortest
+      $shortest_length = $lenght;
+      $shortest_key = $key;
+    }
+  }
+
+  // Output the shortest word if exists
+  echo ((isset($words[$shortest_key])) ? $words[$shortest_key] : '') . PHP_EOL;
+}
